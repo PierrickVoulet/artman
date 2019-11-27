@@ -118,23 +118,23 @@ class ProtocCodeGenTaskBase(task_base.TaskBase):
         #
         # Other languages don't mind us doing this, so we just do it for
         # everyone.
-        for (dirname, protos) in protoc_utils.group_by_go_package(
-                protoc_utils.find_protos(src_proto_path, excluded_proto_path)).items():
-            # It is possible to get duplicate protos. De-dupe them.
-            protos = sorted(set(protos))
+        # for (dirname, protos) in protoc_utils.group_by_go_package(
+        #         protoc_utils.find_protos(src_proto_path, excluded_proto_path)).items():
+        # It is possible to get duplicate protos. De-dupe them.
+        protos = sorted(set(protoc_utils.find_protos(src_proto_path, excluded_proto_path)))
 
-            command_params = proto_params.proto_compiler_command + \
-                common_resources_includes + \
-                protoc_utils.protoc_header_params(
-                    import_proto_path + src_proto_path, toolkit_path) + \
-                protoc_proto_params + \
-                protoc_grpc_params + \
-                protoc_plugin_params + \
-                common_resources_paths + \
-                protos
+        command_params = proto_params.proto_compiler_command + \
+            common_resources_includes + \
+            protoc_utils.protoc_header_params(
+                import_proto_path + src_proto_path, toolkit_path) + \
+            protoc_proto_params + \
+            protoc_grpc_params + \
+            protoc_plugin_params + \
+            common_resources_paths + \
+            protos
 
-            # Execute protoc.
-            self.exec_command(command_params)
+        # Execute protoc.
+        self.exec_command(command_params)
 
         return pkg_dir
 
