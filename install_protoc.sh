@@ -14,13 +14,13 @@ protobuf_versions[nodejs]=3.8.0
 protobuf_versions[go]=3.8.0
 protobuf_versions[python]=3.8.0
 protobuf_versions[ruby]=3.8.0
-protobuf_versions[php]=master-20191115
+protobuf_versions[php]=2019.12.06
 protobuf_versions[csharp]=3.8.0
 # Protobuf Java dependency must match grpc-java's protobuf dep.
 protobuf_versions[java]=3.7.1
 
 # RC1 url has no logic: compare rc1 in the folder name with rc-1 in the filename
-override_download_location[master-20191115]=https://storage.googleapis.com/artman/protoc-20191115.zip
+override_download_location[2019.12.06]=https://github.com/PierrickVoulet/artman/releases/download/aggregated-metadata/protoc-aggregated-metadata.zip
 
 # Install each unique protobuf version.
 for i in "${protobuf_versions[@]}"
