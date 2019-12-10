@@ -12,9 +12,9 @@ declare -A override_download_location
 # Please adhere to this format, as artman parses these lines for the protobuf versions.
 protobuf_versions[nodejs]=3.8.0
 protobuf_versions[go]=3.8.0
-protobuf_versions[python]=3.8.0
+protobuf_versions[python]=3.11.1
 protobuf_versions[ruby]=3.8.0
-protobuf_versions[php]=3.9.0-rc1
+protobuf_versions[php]=3.11.1
 protobuf_versions[csharp]=3.8.0
 # Protobuf Java dependency must match grpc-java's protobuf dep.
 protobuf_versions[java]=3.7.1
