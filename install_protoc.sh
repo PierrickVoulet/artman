@@ -14,13 +14,25 @@ protobuf_versions[nodejs]=3.8.0
 protobuf_versions[go]=3.8.0
 protobuf_versions[python]=3.8.0
 protobuf_versions[ruby]=3.8.0
-protobuf_versions[php]=2019.12.06
 protobuf_versions[csharp]=3.8.0
 # Protobuf Java dependency must match grpc-java's protobuf dep.
 protobuf_versions[java]=3.7.1
 
 # RC1 url has no logic: compare rc1 in the folder name with rc-1 in the filename
 override_download_location[2019.12.06]=https://github.com/PierrickVoulet/artman/releases/download/aggregated-metadata/protoc-aggregated-metadata.zip
+
+git clone "https://github.com/protocolbuffers/protobuf.git"
+pushd ./protobuf
+git fetch "https://github.com/protocolbuffers/protobuf.git" "3.11.x" && git checkout FETCH_HEAD
+git remote add TeBoring https://github.com/TeBoring/protobuf.git
+git fetch TeBoring php-7.4-fix
+git merge --no-edit TeBoring/php-7.4-fix
+git fetch TeBoring php-aggregate-metadata
+git merge --no-edit TeBoring/php-aggregate-metadata
+./autogen.sh
+./configure
+make -j4
+popd
 
 # Install each unique protobuf version.
 for i in "${protobuf_versions[@]}"
@@ -38,7 +50,6 @@ do
       && chmod +x /usr/src/protoc-${i}/bin/protoc \
       && ln -s /usr/src/protoc-${i}/bin/protoc /usr/local/bin/protoc-${i}
 done
-
 
 # Install GRPC and Protobuf.
 pip3 install --upgrade pip==10.0.1 setuptools==39.2.0 \
