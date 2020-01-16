@@ -14,7 +14,6 @@ protobuf_versions[nodejs]=3.11.2
 protobuf_versions[go]=3.11.2
 protobuf_versions[python]=3.11.2
 protobuf_versions[ruby]=3.11.2
-protobuf_versions[php]=3.11.2
 protobuf_versions[csharp]=3.11.2
 # Protobuf Java dependency must match grpc-java's protobuf dep.
 # https://github.com/grpc/grpc-java/blob/18e099d9d37163905fc61febd2aee983e298a066/build.gradle#L51
