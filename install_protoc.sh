@@ -35,6 +35,16 @@ do
       && ln -s /usr/src/protoc-${i}/bin/protoc /usr/local/bin/protoc-${i}
 done
 
+# Install default protobuf version from Agg custom branch.
+git clone "https://github.com/protocolbuffers/protobuf.git"
+pushd ./protobuf
+git remote add TeBoring https://github.com/TeBoring/protobuf.git
+git fetch TeBoring php-loading-opt
+git merge --no-edit TeBoring/php-loading-opt
+./autogen.sh
+./configure
+make -j4
+popd
 
 # Install GRPC and Protobuf.
 pip3 install --upgrade pip==10.0.1 setuptools==39.2.0 \

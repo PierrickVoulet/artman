@@ -190,23 +190,7 @@ class _PythonProtoParams(_SimpleProtoParams):
 
 
 def protoc_binary_name(language):
-    language = language.lower()
-    top_dir = os.path.realpath(os.path.dirname(__file__ + "/../../../"))
-    protoc_install_path = os.path.join(top_dir, 'install_protoc.sh')
-
-    if not os.path.exists(protoc_install_path):
-      # no script in its default location: we're likely running locally and not in Docker image
-      return 'protoc'
-
-    with io.open(protoc_install_path) as protoc_install_file:
-        for line in protoc_install_file:
-            match = re.match('^protobuf_versions\[' + language.lower() + r'\]=(\S+)$', line)
-            if match:
-                current_version = match.group(1)
-                break
-    if not current_version:
-        raise IOError('Cannot determine version from Dockerfile. Using default version %s.' % current_version)
-    return 'protoc-' + current_version
+    return '/protobuf/src/protoc'
 
 
 PROTO_PARAMS_MAP = {
