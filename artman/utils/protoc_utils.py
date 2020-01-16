@@ -190,7 +190,7 @@ class _PythonProtoParams(_SimpleProtoParams):
 
 
 def protoc_binary_name(language):
-    return '/protobuf/src/protoc'
+    return '/usr/src/protoc-3.11.2/protobuf/src/protoc'
 
 
 PROTO_PARAMS_MAP = {

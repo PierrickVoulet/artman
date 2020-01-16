@@ -37,6 +37,8 @@ done
 # Install default protobuf version from Agg custom branch.
 git clone "https://github.com/protocolbuffers/protobuf.git"
 pushd ./protobuf
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
 git remote add TeBoring https://github.com/TeBoring/protobuf.git
 git fetch TeBoring php-loading-opt
 git merge --no-edit TeBoring/php-loading-opt
