@@ -130,7 +130,7 @@ class _PhpProtoParams(_SimpleProtoParams):
         return self.params.code_root(output_dir)
 
     def lang_out_param(self, output_dir, with_grpc):
-        return '--php_out=aggregate_metadata=google.ads.googleads.v3:{}'.format(self.code_root(output_dir))
+        return '--php_out=aggregate_metadata=google.ads.googleads:{}'.format(self.code_root(output_dir))
 
     def grpc_out_param(self, output_dir):
         return '--grpc_out={}:{}'.format(
