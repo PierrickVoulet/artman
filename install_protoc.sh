@@ -34,17 +34,20 @@ do
       && ln -s /usr/src/protoc-${i}/bin/protoc /usr/local/bin/protoc-${i}
 done
 
-# Install default protobuf version from Agg custom branch.
+# Install custom protoc for Agg
+mkdir -p /usr/src/protoc-custom
+pushd /usr/src/protoc-custom
 git clone "https://github.com/protocolbuffers/protobuf.git"
-pushd ./protobuf
+pushd /usr/src/protoc-custom/protobuf
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 git remote add TeBoring https://github.com/TeBoring/protobuf.git
-git fetch TeBoring php-loading-opt
-git merge --no-edit TeBoring/php-loading-opt
+git fetch TeBoring php-aggregate-metadata
+git merge --no-edit TeBoring/php-aggregate-metadata
 ./autogen.sh
 ./configure
 make -j4
+popd
 popd
 
 # Install GRPC and Protobuf.

@@ -130,7 +130,7 @@ class _PhpProtoParams(_SimpleProtoParams):
         return self.params.code_root(output_dir)
 
     def lang_out_param(self, output_dir, with_grpc):
-        return '--php_out={}'.format(self.code_root(output_dir))
+        return '--php_out=aggregate_metadata=google.ads.googleads.v3:{}'.format(self.code_root(output_dir))
 
     def grpc_out_param(self, output_dir):
         return '--grpc_out={}:{}'.format(
@@ -190,7 +190,7 @@ class _PythonProtoParams(_SimpleProtoParams):
 
 
 def protoc_binary_name(language):
-    return '/usr/src/protoc-3.11.2/protobuf/src/protoc'
+    return '/usr/src/protoc-custom/protobuf/src/protoc'
 
 
 PROTO_PARAMS_MAP = {
