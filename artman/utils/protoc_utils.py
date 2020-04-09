@@ -51,7 +51,7 @@ class _SimpleProtoParams(object):
         parameter_key = '--{language}_out'.format(language=self.language)
         parameter_value_template = language_out_override or self.default_lang_out_value(with_grpc)
         parameter_value = parameter_value_template.format(root=self.code_root(output_dir))
-        return '{}={}'.format(parameter_key, parameter_value)
+        return '{}=aggregate_metadata=google.ads.googleads:{}'.format(parameter_key, parameter_value)
 
     def grpc_plugin_path(self, dummy_toolkit_path):
         if self.path is None:
@@ -194,23 +194,7 @@ class _PythonProtoParams(_SimpleProtoParams):
 
 
 def protoc_binary_name(language):
-    language = language.lower()
-    top_dir = os.path.realpath(os.path.dirname(__file__ + "/../../../"))
-    protoc_install_path = os.path.join(top_dir, 'install_protoc.sh')
-
-    if not os.path.exists(protoc_install_path):
-      # no script in its default location: we're likely running locally and not in Docker image
-      return 'protoc'
-
-    with io.open(protoc_install_path) as protoc_install_file:
-        for line in protoc_install_file:
-            match = re.match(r'^protobuf_versions\[' + language.lower() + r'\]=(\S+)$', line)
-            if match:
-                current_version = match.group(1)
-                break
-    if not current_version:
-        raise IOError('Cannot determine version from Dockerfile. Using default version %s.' % current_version)
-    return 'protoc-' + current_version
+    return '/usr/src/protoc-custom/protobuf/src/protoc'
 
 
 PROTO_PARAMS_MAP = {
