@@ -90,8 +90,7 @@ RUN export JAVA_HOME
 # Install Go.
 RUN mkdir -p /golang \
   && cd /golang \
-  && curl https://dl.google.com/go/go1.11.linux-amd64.tar.gz > go.tar.gz \
-  && (echo 'b3fcf280ff86558e0559e185b601c9eade0fd24c900b4c63cd14d1d38613e499 go.tar.gz' | sha256sum -c) \
+  && curl https://dl.google.com/go/go1.13.linux-amd64.tar.gz > go.tar.gz \
   && tar xzf go.tar.gz \
   && rm go.tar.gz \
   && cd /

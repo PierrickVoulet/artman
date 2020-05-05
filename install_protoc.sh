@@ -14,7 +14,6 @@ protobuf_versions[nodejs]=3.11.2
 protobuf_versions[go]=3.11.2
 protobuf_versions[python]=3.11.2
 protobuf_versions[ruby]=3.11.2
-protobuf_versions[php]=3.11.2
 protobuf_versions[csharp]=3.11.2
 # Protobuf Java dependency must match grpc-java's protobuf dep.
 # https://github.com/grpc/grpc-java/blob/18e099d9d37163905fc61febd2aee983e298a066/build.gradle#L51
@@ -35,6 +34,18 @@ do
       && ln -s /usr/src/protoc-${i}/bin/protoc /usr/local/bin/protoc-${i}
 done
 
+# Install custom protoc for Agg
+mkdir -p /usr/src/protoc-custom
+curl --location https://github.com/protocolbuffers/protobuf/releases/download/v3.12.0-rc1/protobuf-all-3.12.0-rc-1.zip > /usr/src/protoc-custom/protoc.zip
+pushd /usr/src/protoc-custom
+unzip protoc.zip
+rm protoc.zip
+pushd /usr/src/protoc-custom/protobuf-3.12.0-rc-1
+./autogen.sh
+./configure
+make -j4
+popd
+popd
 
 # Install GRPC and Protobuf.
 pip3 install --upgrade pip==20.0.2 setuptools==39.2.0 \
